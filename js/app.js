@@ -36,13 +36,13 @@ Enemy.prototype.checkCollision = function() {
         playerZone.x + playerZone.width > enemyZone.x &&
         playerZone.y < enemyZone.y + enemyZone.height &&
         playerZone.height + playerZone.y > enemyZone.y) {
-        //resets player at start upon collision;
+        //Resets player at start upon collision;
         player.x = 200;
         player.y = 380;
     }
 };
 
-    
+
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -55,8 +55,47 @@ let Player = function(speed, x, y) {
   this.speed = speed;
   this.x = x;
   this.y = y;
-
+// The image/sprite for our player, this uses
+  this.sprite = 'images/char-boy.png';
 }
+
+Player.prototype.update = function() {
+
+    if (this.y > 380) {
+        this.y = 380;
+    }
+
+    if (this.x > 400) {
+        this.x = 400;
+    }
+
+    if (this.x < 0) {
+        this.x = 0;
+    }
+    // Resets player at the start after reaching the top
+    if (this.y < 0) {
+      this.x = 200;
+      this.y = 380;
+    }
+};
+
+Player.prototype.handleInput = function(allowedKeys) {
+    switch (allowedKeys) {
+        case 'left':
+            this.x -= this.speed + 40;
+            break;
+        case 'up':
+            this.y -= this.speed + 25;
+            break;
+        case 'right':
+            this.x += this.speed + 40;
+            break;
+        case 'down':
+            this.y += this.speed + 25;
+            break;
+    }
+};
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
