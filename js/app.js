@@ -81,6 +81,7 @@ Player.prototype.update = function() {
     }
     // Resets player at the start after reaching the top
     if (this.y < 0) {
+      alert("You Win, Congratulations!")
       this.x = 200;
       this.y = 380;
     }
