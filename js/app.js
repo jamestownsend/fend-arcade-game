@@ -52,6 +52,9 @@ Enemy.prototype.checkCollision = function() {
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.fillStyle = "white";
+    ctx.font = "18px arial MS";
+    ctx.fillText("Score: " + player.playerScore, 20, 90);
 };
 
 // Now write your own player class
@@ -61,8 +64,9 @@ var Player = function(x, y, speed) {
 this.x = x;
 this.y = y;
 this.speed = speed;
+this.playerScore = 0
 // The image/sprite for our player, this uses
-  this.sprite = 'images/char-boy.png';
+this.sprite = 'images/char-boy.png';
 }
 
 //Stops player from being able to move outside of the game map.
@@ -81,7 +85,8 @@ Player.prototype.update = function() {
     }
     // Resets player at the start after reaching the top
     if (this.y < 0) {
-      alert("You Win, Congratulations!")
+      alert("Nice, Congratulations!")
+      this.playerScore += 1;
       this.x = 200;
       this.y = 380;
     }
